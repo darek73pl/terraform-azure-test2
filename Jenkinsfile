@@ -8,32 +8,45 @@ pipeline {
         ARM_CLIENT_ID            = credentials('Terraform-Azure-Client_ID')
         ARM_CLIENT_SECRET        = credentials('Terraform-Azure-Client-Secret')
         
-        //name of container for storage_account_name = "terraformstorageaccount1"
+        // name of container for storage_account_name = "terraformstorageaccount1"
         ARM_STATE_CONTAINER_NAME = "terraform-state-test2"
+
+        TERRAFORM_PATH           = ${getTerraformPath()}
+        
+        // name of terraform workspace: "dev" or "prod" 
+        TERRAFORM_WORKSPACE      = "dev"
+
+        
     }
     
     stages {
-        stage ("terra-create-state-container") {
+        stage ('terra-create-state-container') {
             steps {
                 script {
                     createTerraformStorageContainer()
                 }
             }
         }
-        stage ('terra-init'){
+        stage ('terra-create-and-choose-workspace') {
             steps {
-                 bat "\"${getTerraformPath()}\\terraform\" init"               
+                bat "\"%TERRAFORM_PATH%\\terraform\" workspace new %TERRAFORM_WORKSPACE%"
+                bat "\"%TERRAFORM_PATH%\\terraform\" workspace select %TERRAFORM_WORKSPACE%"
             }
         }
-        stage ('terra-plan') {
+        stage ('terra-init'){
             steps {
-                bat "\"${getTerraformPath()}\\terraform\" plan"
+                bat "\"%TERRAFORM_PATH%\\terraform\" init"               
+            }
+        }
+        /*stage ('terra-plan') {
+            steps {
+                bat "\"%TERRAFORM_PATH%\\terraform\" plan"
             }
         }  
         stage ('terra-apply') {
             steps {
-                bat "\"${getTerraformPath()}\\terraform\" apply -auto-approve" 
-            }
+                bat "\"%TERRAFORM_PATH%\\terraform\" apply -auto-approve" 
+            } */
         } 
     }
 }
