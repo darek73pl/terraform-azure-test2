@@ -31,7 +31,7 @@ vnet_sub_allow_http = {
 }
 
 vm_names = {
-    "dev"  = ["vd1"]
+    "dev"  = ["vd1","ala"]
     "prod" = ["vp1","vp2"]
 }
 
