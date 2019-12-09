@@ -46,6 +46,21 @@ module "web_tier" {
   vm_admin_username = var.vm_admin_username
   vm_admin_password = var.vm_admin_password
 }
+
+module "web_tier2" {
+  source = "./modules/Compute"
+
+  RG_name           = azurerm_resource_group.RG1.name
+  vm_location       = var.location 
+  vm_names          = [var.vm_names[terraform.workspace][1]]
+  vm_with_pips      = var.vm_with_pips[terraform.workspace]
+  vm_vnet           = module.vnet1.vnet_name
+  vm_subnet         = module.vnet1.vnet_subnet_names[1]
+  vm_AS             = var.vm_AS[terraform.workspace]
+  vm_admin_username = var.vm_admin_username
+  vm_admin_password = var.vm_admin_password
+}
+
 /*
 resource "azurerm_virtual_machine_extension" "web_server_ext" {
   count                = length(module.web_tier.vm_names)

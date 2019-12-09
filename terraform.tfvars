@@ -26,22 +26,22 @@ vnet_sub_allow_rdp = {
 }
 
 vnet_sub_allow_http = {
-    "dev"  = [true, true]
+    "dev"  = [true, false]
     "prod" = [true]
 }
 
 vm_names = {
-    "dev"  = ["nowy"]
+    "dev"  = ["vd1", "vd2"]
     "prod" = ["vp1"]
 }
 
 vm_with_pips = {
-    "dev"   = ["nowy"]
+    "dev"   = ["vd1"]
     "prod"  = ["vp1"]
 }
 
 vm_AS = {
-    "dev"  = false
+    "dev"  = true
     "prod" = true
 }
 
