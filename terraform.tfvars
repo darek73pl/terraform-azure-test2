@@ -31,12 +31,12 @@ vnet_sub_allow_http = {
 }
 
 vm_names = {
-    "dev"  = ["vd1"]
+    "dev"  = ["nowy"]
     "prod" = ["vp1"]
 }
 
 vm_with_pips = {
-    "dev"   = ["vd1"]
+    "dev"   = ["nowy"]
     "prod"  = ["vp1"]
 }
 
