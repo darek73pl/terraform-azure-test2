@@ -25,17 +25,18 @@ pipeline {
                 }
             }
         }
+        stage ('terra-init'){
+            steps {
+                bat "\"%TERRAFORM_PATH%\\terraform\" init"               
+            }
+        }
         stage ('terra-create-and-choose-workspace') {
             steps {
                 bat "\"%TERRAFORM_PATH%\\terraform\" workspace new %TERRAFORM_WORKSPACE%"
                 bat "\"%TERRAFORM_PATH%\\terraform\" workspace select %TERRAFORM_WORKSPACE%"
             }
         }
-        stage ('terra-init'){
-            steps {
-                bat "\"%TERRAFORM_PATH%\\terraform\" init"               
-            }
-        }
+        
         /*stage ('terra-plan') {
             steps {
                 bat "\"%TERRAFORM_PATH%\\terraform\" plan"
