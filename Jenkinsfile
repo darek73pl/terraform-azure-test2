@@ -32,7 +32,7 @@ pipeline {
         }
         stage ('terra-create-and-choose-workspace') {
             steps {
-                bat "\"%TERRAFORM_PATH%\\terraform\" workspace new %TERRAFORM_WORKSPACE%"
+                bat label: '', returnStatus: true, script: "\"%TERRAFORM_PATH%\\terraform\" workspace new %TERRAFORM_WORKSPACE%"
                 bat "\"%TERRAFORM_PATH%\\terraform\" workspace select %TERRAFORM_WORKSPACE%"
             }
         }
