@@ -46,7 +46,7 @@ module "web_tier" {
   vm_admin_username = var.vm_admin_username
   vm_admin_password = var.vm_admin_password
 }
-
+/*
 resource "azurerm_virtual_machine_extension" "web_server_ext" {
   count                = length(module.web_tier.vm_names)
   name                 = "web-server-ext"

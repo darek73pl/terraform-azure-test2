@@ -36,17 +36,20 @@ pipeline {
                 bat "\"%TERRAFORM_PATH%\\terraform\" workspace select %TERRAFORM_WORKSPACE%"
             }
         }
-        
-        /*stage ('terra-plan') {
+        stage ('terra-plan') {
             steps {
-                bat "\"%TERRAFORM_PATH%\\terraform\" plan"
+                withCredentials([string(credentialsId: 'Terraform-Azure-LocalAdmin-Password', variable: 'ADMIN_PASS')]) {
+                    bat "\"%TERRAFORM_PATH%\\terraform\" plan -var 'vm_admin_password=%ADMIN_PASS%'"
+                }
             }
         }  
         stage ('terra-apply') {
             steps {
-                bat "\"%TERRAFORM_PATH%\\terraform\" apply -auto-approve" 
+                withCredentials([string(credentialsId: 'Terraform-Azure-LocalAdmin-Password', variable: 'ADMIN_PASS')]) {
+                    bat "\"%TERRAFORM_PATH%\\terraform\" apply -var 'vm_admin_password=%ADMIN_PASS%' -auto-approve"
+                } 
             } 
-        } */
+        } 
     }
 }
 
