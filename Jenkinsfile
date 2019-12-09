@@ -39,14 +39,14 @@ pipeline {
         stage ('terra-plan') {
             steps {
                 withCredentials([string(credentialsId: 'Terraform-Azure-LocalAdmin-Password', variable: 'ADMIN_PASS')]) {
-                    bat "\"%TERRAFORM_PATH%\\terraform\" plan -var 'vm_admin_password=%ADMIN_PASS%'"
+                    bat "\"%TERRAFORM_PATH%\\terraform\" plan -var \"vm_admin_password=%ADMIN_PASS%\""
                 }
             }
         }  
         stage ('terra-apply') {
             steps {
                 withCredentials([string(credentialsId: 'Terraform-Azure-LocalAdmin-Password', variable: 'ADMIN_PASS')]) {
-                    bat "\"%TERRAFORM_PATH%\\terraform\" apply -var 'vm_admin_password=%ADMIN_PASS%' -auto-approve"
+                    bat "\"%TERRAFORM_PATH%\\terraform\" apply -var \"vm_admin_password=%ADMIN_PASS%\"" -auto-approve"
                 } 
             } 
         } 
