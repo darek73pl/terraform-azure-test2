@@ -47,21 +47,6 @@ module "web_tier" {
   vm_admin_password = var.vm_admin_password
 }
 
-module "web_tier2" {
-  source = "./modules/Compute"
-
-  RG_name           = azurerm_resource_group.RG1.name
-  vm_location       = var.location 
-  vm_names          = [var.vm_names[terraform.workspace][1]]
-  vm_with_pips      = var.vm_with_pips[terraform.workspace]
-  vm_vnet           = module.vnet1.vnet_name
-  vm_subnet         = module.vnet1.vnet_subnet_names[1]
-  vm_AS             = var.vm_AS[terraform.workspace]
-  vm_admin_username = var.vm_admin_username
-  vm_admin_password = var.vm_admin_password
-}
-
-/*
 resource "azurerm_virtual_machine_extension" "web_server_ext" {
   count                = length(module.web_tier.vm_names)
   name                 = "web-server-ext"
@@ -84,36 +69,28 @@ SETTINGS
       "storageAccountKey"  : "${data.azurerm_storage_account.extension_source.primary_access_key}"
     }
   PROTECTED_SETTINGS
-}
-/*
-resource "azurerm_virtual_machine_extension" "web_server2" {
-  name                 = "web-server-ext2"
-  location             = var.location
-  resource_group_name  = azurerm_resource_group.RG1.name
-  virtual_machine_name = module.sub_ola_vm.vm_names[0]
-  publisher            = "Microsoft.Compute"
-  type                 = "CustomScriptExtension"
-  type_handler_version = "1.9"
+/* 
+or from public github
 
-  settings = <<SETTINGS
+settings = <<SETTINGS
     {
         "fileUris": ["https://raw.githubusercontent.com/eltimmo/learning/master/azureInstallWebServer.ps1"],
         "commandToExecute": "powershell -ExecutionPolicy Unrestricted -NoProfile -NonInteractive -File azureInstallWebServer.ps1"
     }
     SETTINGS
-}
-
-
-output "subnets1" {
-    value = module.vnet1.vnet_subnet_ids[1]
-}
 */
-output "liczba" {
-    value=length(module.vnet1.vnet_subnet_ids)
+}
+
+output "subnet_amount" {
+    value =length(module.vnet1.vnet_subnet_ids)
+} 
+
+output "subnet1_id" {
+    value = module.vnet1.vnet_subnet_ids[1]
 }
 
 output "vm_names_1" {
-    value= module.web_tier.vm_names
+    value = module.web_tier.vm_names
 }
 
 output "vm_ids_1" {
