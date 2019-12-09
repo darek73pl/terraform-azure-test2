@@ -1,3 +1,13 @@
+#####################################################################
+#                                                                   #
+#  Module building VM                                               #
+#  OS - Windows Server 2016 Database                                #
+#  possible options: - public IP                                    #
+#                    - availability set                             #
+#                    - VM size                                      #
+#                                                                   #
+#####################################################################
+
 
 locals {
   map_all_vms      = { for v in var.vm_names : v => v}
@@ -65,7 +75,7 @@ resource "azurerm_virtual_machine" "vm" {
     managed_disk_type = "Standard_LRS"
   }
   os_profile {
-    computer_name  = each.key
+    computer_name  = "${var.vm_vnet}-${var.vm_subnet}-${each.key}"
     admin_username = var.vm_admin_username
     admin_password = var.vm_admin_password
   }

@@ -1,3 +1,11 @@
+#####################################################################
+#                                                                   #
+#  Module building vnet, subset(s), NSGs                            #
+#  possible options: - HTTP allow (NSG)                             #
+#                    - RDP allow (NSG)                              #
+#                                                                   #
+#####################################################################
+
 resource "azurerm_virtual_network" "vnet" {
   name                = var.vnet_name
   location            = var.vnet_location
