@@ -11,7 +11,7 @@ pipeline {
         // name of container for storage_account_name = "terraformstorageaccount1"
         ARM_STATE_CONTAINER_NAME = "terraform-state-test2"
 
-        TERRAFORM_PATH           = ${getTerraformPath()}
+        TERRAFORM_PATH           = "${getTerraformPath()}"
         
         // name of terraform workspace: "dev" or "prod" 
         TERRAFORM_WORKSPACE      = "dev" 
