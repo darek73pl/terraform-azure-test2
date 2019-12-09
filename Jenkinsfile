@@ -14,9 +14,7 @@ pipeline {
         TERRAFORM_PATH           = ${getTerraformPath()}
         
         // name of terraform workspace: "dev" or "prod" 
-        TERRAFORM_WORKSPACE      = "dev"
-
-        
+        TERRAFORM_WORKSPACE      = "dev" 
     }
     
     stages {
@@ -46,8 +44,8 @@ pipeline {
         stage ('terra-apply') {
             steps {
                 bat "\"%TERRAFORM_PATH%\\terraform\" apply -auto-approve" 
-            } */
-        } 
+            } 
+        } */
     }
 }
 
